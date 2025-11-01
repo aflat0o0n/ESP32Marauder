@@ -30,7 +30,7 @@
   //#define MARAUDER_C5
   //#define MARAUDER_CARDPUTER
   //#define MARAUDER_V8
-  //#define ESP32_ILI9341_BUTTONS // ESP32 WROOM with ILI9341 and physical buttons
+  #define ESP32_ILI9341_BUTTONS // ESP32 WROOM with ILI9341 and physical buttons
   //// END BOARD TARGETS
 
   #define MARAUDER_VERSION "v1.8.9"
