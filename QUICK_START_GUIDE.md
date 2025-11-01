@@ -98,11 +98,11 @@ If you want logging capabilities:
    
    **Edit configs.h:**
    - Open `esp32_marauder/configs.h`
-   - Find line ~32 and ensure `ESP32_ILI9341_BUTTONS` is defined:
+   - Find line ~32 and uncomment `ESP32_ILI9341_BUTTONS` (remove the `//` before it):
      ```c
-     #define ESP32_ILI9341_BUTTONS
+     #define ESP32_ILI9341_BUTTONS  // Remove // from start of line
      ```
-   - Comment out any other board definitions (add `//` before them)
+   - Ensure all other board definitions are commented out (have `//` before them)
 
    **Edit User_Setup_Select.h:**
    - Open `User_Setup_Select.h` (in the root folder)

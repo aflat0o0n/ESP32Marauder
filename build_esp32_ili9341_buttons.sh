@@ -31,11 +31,11 @@ arduino-cli version
 
 echo ""
 echo "Step 2: Update Arduino core index..."
-arduino-cli core update-index --additional-urls "https://github.com/espressif/arduino-esp32/releases/download/${ESP32_VERSION}/package_esp32_dev_index.json"
+arduino-cli core update-index --additional-urls "https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json"
 
 echo ""
 echo "Step 3: Install ESP32 core v${ESP32_VERSION}..."
-arduino-cli core install esp32:esp32@${ESP32_VERSION} --additional-urls "https://github.com/espressif/arduino-esp32/releases/download/${ESP32_VERSION}/package_esp32_dev_index.json"
+arduino-cli core install esp32:esp32@${ESP32_VERSION} --additional-urls "https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json"
 
 echo ""
 echo "Step 4: Installing required libraries..."
@@ -77,12 +77,36 @@ echo "Step 5: Configuring build environment..."
 echo "Updating configs.h with board definition..."
 cd esp32_marauder
 
-# Enable the ESP32_ILI9341_BUTTONS define
-sed -i 's|//#define ESP32_ILI9341_BUTTONS|#define ESP32_ILI9341_BUTTONS|g' configs.h
+# Backup original configs.h
+cp configs.h configs.h.backup
 
-# Comment out any other active board defines
-sed -i 's|^[[:space:]]*#define MARAUDER_|//#define MARAUDER_|g' configs.h
+# Enable the ESP32_ILI9341_BUTTONS define (works whether commented or not)
+sed -i 's|^[[:space:]]*//[[:space:]]*#define ESP32_ILI9341_BUTTONS|#define ESP32_ILI9341_BUTTONS|g' configs.h
+sed -i 's|^[[:space:]]*#define ESP32_ILI9341_BUTTONS|#define ESP32_ILI9341_BUTTONS|g' configs.h
+
+# Comment out any other active board defines (but not ESP32_ILI9341_BUTTONS)
+sed -i 's|^[[:space:]]*#define MARAUDER_M5STICKC[^P]|//#define MARAUDER_M5STICKC|g' configs.h
+sed -i 's|^[[:space:]]*#define MARAUDER_M5STICKCP2|//#define MARAUDER_M5STICKCP2|g' configs.h
+sed -i 's|^[[:space:]]*#define MARAUDER_MINI|//#define MARAUDER_MINI|g' configs.h
+sed -i 's|^[[:space:]]*#define MARAUDER_V4|//#define MARAUDER_V4|g' configs.h
+sed -i 's|^[[:space:]]*#define MARAUDER_V6[^_]|//#define MARAUDER_V6|g' configs.h
+sed -i 's|^[[:space:]]*#define MARAUDER_V6_1|//#define MARAUDER_V6_1|g' configs.h
+sed -i 's|^[[:space:]]*#define MARAUDER_V7[^_]|//#define MARAUDER_V7|g' configs.h
+sed -i 's|^[[:space:]]*#define MARAUDER_V7_1|//#define MARAUDER_V7_1|g' configs.h
+sed -i 's|^[[:space:]]*#define MARAUDER_V8|//#define MARAUDER_V8|g' configs.h
+sed -i 's|^[[:space:]]*#define MARAUDER_KIT|//#define MARAUDER_KIT|g' configs.h
+sed -i 's|^[[:space:]]*#define MARAUDER_FLIPPER|//#define MARAUDER_FLIPPER|g' configs.h
+sed -i 's|^[[:space:]]*#define MARAUDER_REV_FEATHER|//#define MARAUDER_REV_FEATHER|g' configs.h
+sed -i 's|^[[:space:]]*#define MARAUDER_CARDPUTER|//#define MARAUDER_CARDPUTER|g' configs.h
+sed -i 's|^[[:space:]]*#define MARAUDER_CYD|//#define MARAUDER_CYD|g' configs.h
 sed -i 's|^[[:space:]]*#define GENERIC_ESP32|//#define GENERIC_ESP32|g' configs.h
+sed -i 's|^[[:space:]]*#define ESP32_LDDB|//#define ESP32_LDDB|g' configs.h
+sed -i 's|^[[:space:]]*#define XIAO_ESP32|//#define XIAO_ESP32|g' configs.h
+sed -i 's|^[[:space:]]*#define MARAUDER_MULTIBOARD|//#define MARAUDER_MULTIBOARD|g' configs.h
+sed -i 's|^[[:space:]]*#define MARAUDER_DEV_BOARD|//#define MARAUDER_DEV_BOARD|g' configs.h
+sed -i 's|^[[:space:]]*#define MARAUDER_C5|//#define MARAUDER_C5|g' configs.h
+
+echo "Configuration backup saved as configs.h.backup"
 
 cd ..
 
