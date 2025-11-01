@@ -1,0 +1,256 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    ESP32 WROOM + ILI9341 + BUTTONS                           ║
+║                         Wiring Diagram (ASCII Art)                           ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+
+                              COMPLETE WIRING DIAGRAM
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                                                              │
+│                         [ILI9341 TFT Display 240x320]                        │
+│                         ┌───────────────────────┐                           │
+│                         │  ┌───────────────┐   │                           │
+│                         │  │               │   │                           │
+│                         │  │    Screen     │   │                           │
+│                         │  │   240x320     │   │                           │
+│                         │  │               │   │                           │
+│                         │  └───────────────┘   │                           │
+│                         └───────┬───────────────┘                           │
+│                                 │                                            │
+│         VCC GND CS RST DC MOSI SCK LED MISO                                │
+│          │   │   │   │   │   │   │   │   │                                 │
+│          │   │   │   │   │   │   │   │   │                                 │
+│    ┌─────┴───┴───┴───┴───┴───┴───┴───┴───┴─────┐                           │
+│    │     3.3V                                   │                           │
+│    │     GND                                    │                           │
+│    │     GPIO17 ← CS                            │                           │
+│    │     GPIO5  ← RST                           │                           │
+│    │     GPIO16 ← DC                            │                           │
+│    │     GPIO23 ← MOSI ─────────────┐           │                           │
+│    │     GPIO18 ← SCK  ──────────┐  │           │                           │
+│    │     GPIO32 ← LED (Backlight)│  │           │                           │
+│    │     GPIO19 ← MISO ───────┐  │  │           │    ESP32 WROOM           │
+│    │                           │  │  │           │    DevKit Board          │
+│    │  ┌────────────────────────┼──┼──┼─────┐    │    (48 pins)            │
+│    │  │ SD Card (Optional)     │  │  │     │    │                           │
+│    │  │ ┌────────────────┐     │  │  │     │    │                           │
+│    │  │ │   microSD      │     │  │  │     │    │                           │
+│    │  │ └────────────────┘     │  │  │     │    │                           │
+│    │  │   CS ── GPIO12         │  │  │     │    │                           │
+│    │  │   MOSI ────────────────┼──┼──┘     │    │                           │
+│    │  │   MISO ────────────────┘  │        │    │                           │
+│    │  │   SCK ────────────────────┘        │    │                           │
+│    │  │   VCC ── 3.3V                      │    │                           │
+│    │  │   GND ── GND                       │    │                           │
+│    │  └────────────────────────────────────┘    │                           │
+│    │                                             │                           │
+│    │  Physical Buttons (5x)                     │                           │
+│    │                                             │                           │
+│    │     ┌────┐                                  │                           │
+│    │  ───┤ UP ├─── GPIO36 ──GND                │                           │
+│    │     └────┘                                  │                           │
+│    │     ┌────┐                                  │                           │
+│    │  ───┤DOWN├─── GPIO35 ──GND                │                           │
+│    │     └────┘                                  │                           │
+│    │     ┌────┐                                  │                           │
+│    │  ───┤LEFT├─── GPIO13 ──GND                │                           │
+│    │     └────┘                                  │                           │
+│    │     ┌────┐                                  │                           │
+│    │  ───┤RGHT├─── GPIO39 ──GND                │                           │
+│    │     └────┘                                  │                           │
+│    │     ┌────┐                                  │                           │
+│    │  ───┤CNTR├─── GPIO34 ──GND                │                           │
+│    │     └────┘                                  │                           │
+│    │                                             │                           │
+│    │     USB ─────────────────────○             │                           │
+│    │                                             │                           │
+│    │     5V Power ─○ (Optional external power)  │                           │
+│    └─────────────────────────────────────────────┘                           │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+                            DETAILED PIN CONNECTIONS
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  Component  │  Component Pin  │  ESP32 GPIO  │  Notes                        ║
+╠═════════════╪═════════════════╪══════════════╪═══════════════════════════════╣
+║             │                 │              │                               ║
+║  ILI9341    │  VCC            │  3.3V        │  Power (3.3V, NOT 5V!)       ║
+║  Display    │  GND            │  GND         │  Ground                       ║
+║             │  CS             │  GPIO17      │  Chip Select                  ║
+║             │  RESET          │  GPIO5       │  Reset signal                 ║
+║             │  DC/RS          │  GPIO16      │  Data/Command select          ║
+║             │  SDI (MOSI)     │  GPIO23      │  SPI Data In                  ║
+║             │  SCK            │  GPIO18      │  SPI Clock                    ║
+║             │  LED            │  GPIO32      │  Backlight (via 100Ω resistor)║
+║             │  SDO (MISO)     │  GPIO19      │  SPI Data Out (optional)      ║
+║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
+║             │                 │              │                               ║
+║  Button UP  │  Terminal 1     │  GPIO36      │  Input Only pin               ║
+║             │  Terminal 2     │  GND         │  Uses internal pullup         ║
+║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
+║ Button DOWN │  Terminal 1     │  GPIO35      │  ADC pin                      ║
+║             │  Terminal 2     │  GND         │  Uses internal pullup         ║
+║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
+║ Button LEFT │  Terminal 1     │  GPIO13      │  Safe GPIO                    ║
+║             │  Terminal 2     │  GND         │  Uses internal pullup         ║
+║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
+║Button RIGHT │  Terminal 1     │  GPIO39      │  Input Only pin               ║
+║             │  Terminal 2     │  GND         │  Uses internal pullup         ║
+║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
+║Button CENTER│  Terminal 1     │  GPIO34      │  ADC pin                      ║
+║             │  Terminal 2     │  GND         │  Uses internal pullup         ║
+║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
+║             │                 │              │                               ║
+║  SD Card    │  CS             │  GPIO12      │  Chip Select                  ║
+║ (Optional)  │  MOSI           │  GPIO23      │  Shared with display          ║
+║             │  MISO           │  GPIO19      │  Shared with display          ║
+║             │  SCK            │  GPIO18      │  Shared with display          ║
+║             │  VCC            │  3.3V        │  Power                        ║
+║             │  GND            │  GND         │  Ground                       ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+
+                          BREADBOARD LAYOUT SUGGESTION
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                                                              │
+│   [+3.3V Rail] ════════════════════════════════════════════════════         │
+│   [GND Rail]   ════════════════════════════════════════════════════         │
+│                                                                              │
+│   Component Placement:                                                       │
+│                                                                              │
+│   ┌────────────┐                                                            │
+│   │  ILI9341   │ ← Mount display on left side                              │
+│   │  Display   │                                                            │
+│   └────────────┘                                                            │
+│                                                                              │
+│   ┌──────────────────────┐                                                  │
+│   │   ESP32 DevKit       │ ← ESP32 in center                               │
+│   │   (48 pins)          │                                                  │
+│   └──────────────────────┘                                                  │
+│                                                                              │
+│   [UP] [LEFT] [CENTER] [RIGHT] [DOWN] ← Buttons on right side              │
+│                                                                              │
+│   (Optional)                                                                 │
+│   ┌──────────┐                                                              │
+│   │ SD Card  │ ← SD card module below ESP32                                │
+│   │ Module   │                                                              │
+│   └──────────┘                                                              │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+                            BUTTON WIRING DETAIL
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                                                              │
+│   Each button connects like this:                                           │
+│                                                                              │
+│                                                                              │
+│        ESP32 GPIO ────┐                                                     │
+│                       │                                                      │
+│                    ┌──┴──┐                                                  │
+│                    │     │  ← Push Button                                   │
+│                    └──┬──┘                                                  │
+│                       │                                                      │
+│        GND Rail ──────┘                                                     │
+│                                                                              │
+│   When button is pressed:                                                   │
+│   - GPIO connects to GND                                                    │
+│   - Internal pull-up resistor pulls to HIGH when not pressed               │
+│   - Firmware detects LOW when pressed                                       │
+│                                                                              │
+│   Optional: Add 100nF capacitor across button for debouncing               │
+│                                                                              │
+│        ESP32 GPIO ────┬─── Button ─── GND                                  │
+│                       │                                                      │
+│                     [100nF]                                                 │
+│                       │                                                      │
+│                      GND                                                     │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+                      POWER SUPPLY RECOMMENDATIONS
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                                                              │
+│  Option 1: USB Power (Easiest)                                             │
+│  ┌─────────┐                                                                │
+│  │   USB   │──── ESP32 USB Port                                            │
+│  │   5V    │                                                                │
+│  └─────────┘                                                                │
+│     Provides: ~500mA @ 5V (ESP32 regulates to 3.3V)                        │
+│                                                                              │
+│  Option 2: External 5V Power                                               │
+│  ┌─────────┐                                                                │
+│  │   5V    │──── ESP32 VIN Pin                                             │
+│  │  Power  │──── GND Pin                                                    │
+│  └─────────┘                                                                │
+│     Provides: 1A+ @ 5V (ESP32 regulates to 3.3V)                           │
+│     Required for: Heavy WiFi usage, SD card writes                          │
+│                                                                              │
+│  Option 3: Battery (Portable)                                              │
+│  ┌─────────┐                                                                │
+│  │ Li-Ion  │──── ESP32 VIN Pin (through TP4056 charger)                   │
+│  │ 18650   │──── GND Pin                                                    │
+│  └─────────┘                                                                │
+│     Voltage: 3.7V - 4.2V                                                    │
+│     Capacity: 2000mAh+ recommended                                          │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+                           TROUBLESHOOTING TIPS
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                                                              │
+│  If display doesn't work:                                                   │
+│  1. Verify all connections match this diagram                               │
+│  2. Check 3.3V power (NOT 5V!) with multimeter                             │
+│  3. Ensure CS, DC, RST are connected correctly                              │
+│  4. Try different SPI speed (edit User_Setup file)                          │
+│                                                                              │
+│  If buttons don't work:                                                     │
+│  1. Test button continuity with multimeter                                  │
+│  2. Verify GPIO pins match this diagram                                     │
+│  3. Check for shorts between adjacent pins                                  │
+│  4. Add debounce capacitors if getting multiple triggers                    │
+│                                                                              │
+│  If SD card doesn't work:                                                   │
+│  1. Format card as FAT32                                                    │
+│  2. Check SPI sharing with display                                          │
+│  3. Verify CS pin is unique (GPIO12)                                        │
+│  4. Try different card (some cards have compatibility issues)               │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+                             NOTES AND WARNINGS
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║  ⚠️  IMPORTANT WARNINGS:                                                    ║
+║                                                                              ║
+║  • ILI9341 requires 3.3V power, NOT 5V!                                    ║
+║  • Some ILI9341 modules have voltage regulators, check your datasheet      ║
+║  • GPIO36 and GPIO39 are INPUT ONLY - cannot drive outputs                 ║
+║  • Avoid GPIO0, GPIO2, GPIO12, GPIO15 as they affect boot mode             ║
+║  • SD card must be FAT32 formatted                                          ║
+║  • Use quality jumper wires to avoid connection issues                      ║
+║                                                                              ║
+║  💡 HELPFUL TIPS:                                                           ║
+║                                                                              ║
+║  • Label all wires for easier troubleshooting                               ║
+║  • Test display alone before adding buttons                                 ║
+║  • Use breadboard for prototyping, PCB for permanent setup                  ║
+║  • Add 100µF capacitor on 3.3V rail for stability                          ║
+║  • Keep wires short to reduce noise                                         ║
+║  • Document your build with photos                                          ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+
+For more detailed information, see:
+- README_ESP32_ILI9341_BUTTONS.md
+- QUICK_START_GUIDE.md
+
+Project: ESP32 Marauder with ILI9341 and Physical Buttons
+Configuration: ESP32_ILI9341_BUTTONS
+Version: 1.8.9+
