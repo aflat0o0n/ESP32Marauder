@@ -29,11 +29,11 @@ Five GPIO pins configured for physical buttons:
 
 | Button | GPIO | Type | Function |
 |--------|------|------|----------|
-| Up | 36 | INPUT_ONLY | Navigate menu up |
-| Down | 35 | ADC | Navigate menu down |
-| Left | 13 | General | Go back / Navigate left |
-| Right | 39 | INPUT_ONLY | Navigate right / Enter submenu |
-| Center | 34 | ADC | Select / Confirm action |
+| Up | 27 | INPUT_ONLY | Navigate menu up |
+| Down | 33 | ADC | Navigate menu down |
+| Left | 25 | General | Go back / Navigate left |
+| Right | 32 | INPUT_ONLY | Navigate right / Enter submenu |
+| Center | 26 | ADC | Select / Confirm action |
 
 **Pull-up Configuration:**
 - All buttons use internal pull-up resistors
@@ -128,9 +128,9 @@ Created comprehensive documentation for all skill levels:
 ### GPIO Selection Rationale
 The GPIO pins were carefully selected to:
 - Avoid boot mode pins (GPIO0, GPIO2, GPIO12, GPIO15)
-- Use INPUT_ONLY pins where appropriate (GPIO36, GPIO39)
-- Prevent conflicts with display SPI pins
-- Ensure reliability with internal pull-ups
+- Use general-purpose GPIO pins (GPIO25-27, 32-33) away from ADC/SPI interference
+- Prevent electrical crosstalk with display SPI pins
+- Ensure reliability with internal pull-ups and noise immunity
 - Support future expansion (SD card on GPIO12)
 
 ### Display SPI Configuration
@@ -289,7 +289,7 @@ The GPIO pins were carefully selected to:
 ## Known Limitations
 
 ### Hardware Limitations
-- GPIO36 and GPIO39 are INPUT_ONLY (cannot drive outputs)
+- Button pins (GPIO25-27, 32-33) chosen to avoid display SPI interference
 - ILI9341 requires 3.3V (not 5V tolerant on most modules)
 - SD card and display share SPI bus (sequential access)
 - Button debouncing relies on software (hardware capacitors recommended)

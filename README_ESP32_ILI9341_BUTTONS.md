@@ -32,7 +32,7 @@ GPIO18      →  SCK (CLK)
 GPIO17      →  CS
 GPIO16      →  DC (D/C)
 GPIO5       →  RESET (RST)
-GPIO32      →  LED (Backlight)
+GPIO4       →  LED (Backlight)
 3.3V        →  VCC
 GND         →  GND
 ```
@@ -41,11 +41,11 @@ GND         →  GND
 ```
 Button      ESP32 GPIO  Function
 ──────────────────────────────────
-Up          GPIO36      Navigate Up
-Down        GPIO35      Navigate Down
-Left        GPIO13      Navigate Left / Back
-Right       GPIO39      Navigate Right
-Center      GPIO34      Select / Confirm
+Up          GPIO27      Navigate Up
+Down        GPIO33      Navigate Down
+Left        GPIO25      Navigate Left / Back
+Right       GPIO32      Navigate Right
+Center      GPIO26      Select / Confirm
 ```
 
 **Note**: All buttons use internal pull-up resistors. Connect one side of each button to the specified GPIO and the other side to GND.
@@ -68,11 +68,11 @@ GND         →  GND
                            ESP32 WROOM
                         ┌───────────────┐
                         │               │
-     [Up Button]────────┤ GPIO36        │
-   [Down Button]────────┤ GPIO35        │
-   [Left Button]────────┤ GPIO13        │
-  [Right Button]────────┤ GPIO39        │
- [Center Button]────────┤ GPIO34        │
+     [Up Button]────────┤ GPIO27        │
+   [Down Button]────────┤ GPIO33        │
+   [Left Button]────────┤ GPIO25        │
+  [Right Button]────────┤ GPIO32        │
+ [Center Button]────────┤ GPIO26        │
                         │               │
   ILI9341 MOSI ─────────┤ GPIO23        │
   ILI9341 MISO ─────────┤ GPIO19        │
@@ -80,7 +80,7 @@ GND         →  GND
   ILI9341 CS ───────────┤ GPIO17        │
   ILI9341 DC ───────────┤ GPIO16        │
   ILI9341 RST ──────────┤ GPIO5         │
-  ILI9341 LED ──────────┤ GPIO32        │
+  ILI9341 LED ──────────┤ GPIO4         │
                         │               │
   SD Card CS ───────────┤ GPIO12        │
                         │               │

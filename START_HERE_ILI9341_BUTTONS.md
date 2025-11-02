@@ -55,11 +55,11 @@ chmod +x build_esp32_ili9341_buttons.sh
 
 ### 1️⃣ Wire Your Hardware
 Connect 5 buttons to ESP32:
-- **Up**: GPIO36 → GND
-- **Down**: GPIO35 → GND  
-- **Left**: GPIO13 → GND
-- **Right**: GPIO39 → GND
-- **Center**: GPIO34 → GND
+- **Up**: GPIO27 → GND
+- **Down**: GPIO33 → GND  
+- **Left**: GPIO25 → GND
+- **Right**: GPIO32 → GND
+- **Center**: GPIO26 → GND
 
 Connect ILI9341 display to ESP32:
 - **MOSI**: GPIO23
@@ -284,13 +284,13 @@ All documentation is included in this repository. Start with the guide that matc
 ║  ESP32 MARAUDER - ILI9341 + BUTTONS ║
 ╠══════════════════════════════════════╣
 ║ BUTTONS                              ║
-║  Up:    GPIO36    Down:  GPIO35     ║
-║  Left:  GPIO13    Right: GPIO39     ║
-║  Center: GPIO34                      ║
+║  Up:    GPIO27    Down:  GPIO33     ║
+║  Left:  GPIO25    Right: GPIO32     ║
+║  Center: GPIO26                      ║
 ╠══════════════════════════════════════╣
 ║ DISPLAY (ILI9341)                    ║
 ║  CS:  GPIO17    DC:   GPIO16        ║
-║  RST: GPIO5     BL:   GPIO32        ║
+║  RST: GPIO5     BL:   GPIO4        ║
 ║  MOSI:GPIO23    MISO: GPIO19        ║
 ║  SCK: GPIO18                         ║
 ╠══════════════════════════════════════╣

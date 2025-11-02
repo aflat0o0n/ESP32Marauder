@@ -47,19 +47,19 @@
 │    │  Physical Buttons (5x)                     │                           │
 │    │                                             │                           │
 │    │     ┌────┐                                  │                           │
-│    │  ───┤ UP ├─── GPIO36 ──GND                │                           │
+│    │  ───┤ UP ├─── GPIO27 ──GND                │                           │
 │    │     └────┘                                  │                           │
 │    │     ┌────┐                                  │                           │
-│    │  ───┤DOWN├─── GPIO35 ──GND                │                           │
+│    │  ───┤DOWN├─── GPIO33 ──GND                │                           │
 │    │     └────┘                                  │                           │
 │    │     ┌────┐                                  │                           │
-│    │  ───┤LEFT├─── GPIO13 ──GND                │                           │
+│    │  ───┤LEFT├─── GPIO25 ──GND                │                           │
 │    │     └────┘                                  │                           │
 │    │     ┌────┐                                  │                           │
-│    │  ───┤RGHT├─── GPIO39 ──GND                │                           │
+│    │  ───┤RGHT├─── GPIO32 ──GND                │                           │
 │    │     └────┘                                  │                           │
 │    │     ┌────┐                                  │                           │
-│    │  ───┤CNTR├─── GPIO34 ──GND                │                           │
+│    │  ───┤CNTR├─── GPIO26 ──GND                │                           │
 │    │     └────┘                                  │                           │
 │    │                                             │                           │
 │    │     USB ─────────────────────○             │                           │
@@ -86,19 +86,19 @@
 ║             │  SDO (MISO)     │  GPIO19      │  SPI Data Out (optional)      ║
 ║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
 ║             │                 │              │                               ║
-║  Button UP  │  Terminal 1     │  GPIO36      │  Input Only pin               ║
+║  Button UP  │  Terminal 1     │  GPIO27      │  General purpose GPIO         ║
 ║             │  Terminal 2     │  GND         │  Uses internal pullup         ║
 ║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
-║ Button DOWN │  Terminal 1     │  GPIO35      │  ADC pin                      ║
+║ Button DOWN │  Terminal 1     │  GPIO33      │  General purpose GPIO         ║
 ║             │  Terminal 2     │  GND         │  Uses internal pullup         ║
 ║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
-║ Button LEFT │  Terminal 1     │  GPIO13      │  Safe GPIO                    ║
+║ Button LEFT │  Terminal 1     │  GPIO25      │  General purpose GPIO         ║
 ║             │  Terminal 2     │  GND         │  Uses internal pullup         ║
 ║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
-║Button RIGHT │  Terminal 1     │  GPIO39      │  Input Only pin               ║
+║Button RIGHT │  Terminal 1     │  GPIO32      │  General purpose GPIO         ║
 ║             │  Terminal 2     │  GND         │  Uses internal pullup         ║
 ║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
-║Button CENTER│  Terminal 1     │  GPIO34      │  ADC pin                      ║
+║Button CENTER│  Terminal 1     │  GPIO26      │  General purpose GPIO         ║
 ║             │  Terminal 2     │  GND         │  Uses internal pullup         ║
 ║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
 ║             │                 │              │                               ║
@@ -230,7 +230,7 @@
 ║                                                                              ║
 ║  • ILI9341 requires 3.3V power, NOT 5V!                                    ║
 ║  • Some ILI9341 modules have voltage regulators, check your datasheet      ║
-║  • GPIO36 and GPIO39 are INPUT ONLY - cannot drive outputs                 ║
+║  • Button pins use GPIO25-27, 32-33 to avoid display SPI interference      ║
 ║  • Avoid GPIO0, GPIO2, GPIO12, GPIO15 as they affect boot mode             ║
 ║  • SD card must be FAT32 formatted                                          ║
 ║  • Use quality jumper wires to avoid connection issues                      ║

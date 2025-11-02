@@ -723,11 +723,11 @@
     #endif
 
     #ifdef ESP32_ILI9341_BUTTONS
-      #define L_BTN 13
-      #define C_BTN 34
-      #define U_BTN 36
-      #define R_BTN 39
-      #define D_BTN 35
+      #define L_BTN 25
+      #define C_BTN 26
+      #define U_BTN 27
+      #define R_BTN 32
+      #define D_BTN 33
 
       #define HAS_L
       #define HAS_R

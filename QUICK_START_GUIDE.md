@@ -30,7 +30,7 @@ Connect your ILI9341 display to ESP32:
 | DC | GPIO16 | Data/Command |
 | MOSI | GPIO23 | SPI Master Out |
 | SCK | GPIO18 | SPI Clock |
-| LED | GPIO32 | Backlight (via 100Ω resistor) |
+| LED | GPIO4 | Backlight (via 100Ω resistor) |
 | MISO | GPIO19 | SPI Master In (optional) |
 
 ### Step 2: Wire the Buttons
@@ -39,11 +39,11 @@ Connect 5 push buttons (one side to GND, other side to GPIO):
 
 | Button | ESP32 GPIO | Function |
 |--------|------------|----------|
-| Up | GPIO36 | Navigate up |
-| Down | GPIO35 | Navigate down |
-| Left | GPIO13 | Go back |
-| Right | GPIO39 | Navigate right |
-| Center | GPIO34 | Select/Confirm |
+| Up | GPIO27 | Navigate up |
+| Down | GPIO33 | Navigate down |
+| Left | GPIO25 | Go back |
+| Right | GPIO32 | Navigate right |
+| Center | GPIO26 | Select/Confirm |
 
 **Important:** No external pull-up resistors needed - the firmware uses internal pull-ups.
 
@@ -336,9 +336,9 @@ Print and keep this handy:
 ║  SCK: GPIO18                           ║
 ╠════════════════════════════════════════╣
 ║ BUTTONS                                ║
-║  Up:    GPIO36  Down:  GPIO35         ║
-║  Left:  GPIO13  Right: GPIO39         ║
-║  Center:GPIO34                         ║
+║  Up:    GPIO27  Down:  GPIO33         ║
+║  Left:  GPIO25  Right: GPIO32         ║
+║  Center:GPIO26                         ║
 ╠════════════════════════════════════════╣
 ║ SD CARD (Optional)                     ║
 ║  CS: GPIO12  (Shares SPI with display) ║
