@@ -284,13 +284,13 @@ All documentation is included in this repository. Start with the guide that matc
 ║  ESP32 MARAUDER - ILI9341 + BUTTONS ║
 ╠══════════════════════════════════════╣
 ║ BUTTONS                              ║
-║  Up:    GPIO27    Down:  GPIO33     ║
-║  Left:  GPIO25    Right: GPIO32     ║
-║  Center: GPIO26                      ║
+║  Up:    GPIO14    Down:  GPIO33     ║
+║  Left:  GPIO13    Right: GPIO21     ║
+║  Center: GPIO22                      ║
 ╠══════════════════════════════════════╣
 ║ DISPLAY (ILI9341)                    ║
 ║  CS:  GPIO17    DC:   GPIO16        ║
-║  RST: GPIO5     BL:   GPIO4        ║
+║  RST: GPIO5     BL:   GPIO25        ║
 ║  MOSI:GPIO23    MISO: GPIO19        ║
 ║  SCK: GPIO18                         ║
 ╠══════════════════════════════════════╣

@@ -41,9 +41,9 @@ GND         →  GND
 ```
 Button      ESP32 GPIO  Function
 ──────────────────────────────────
-Up          GPIO27      Navigate Up
+Up          GPIO14      Navigate Up
 Down        GPIO33      Navigate Down
-Left        GPIO25      Navigate Left / Back
+Left        GPIO13      Navigate Left / Back
 Right       GPIO32      Navigate Right
 Center      GPIO26      Select / Confirm
 ```
@@ -68,11 +68,11 @@ GND         →  GND
                            ESP32 WROOM
                         ┌───────────────┐
                         │               │
-     [Up Button]────────┤ GPIO27        │
+     [Up Button]────────┤ GPIO14        │
    [Down Button]────────┤ GPIO33        │
-   [Left Button]────────┤ GPIO25        │
-  [Right Button]────────┤ GPIO32        │
- [Center Button]────────┤ GPIO26        │
+   [Left Button]────────┤ GPIO13        │
+  [Right Button]────────┤ GPIO21        │
+ [Center Button]────────┤ GPIO22        │
                         │               │
   ILI9341 MOSI ─────────┤ GPIO23        │
   ILI9341 MISO ─────────┤ GPIO19        │
@@ -80,7 +80,7 @@ GND         →  GND
   ILI9341 CS ───────────┤ GPIO17        │
   ILI9341 DC ───────────┤ GPIO16        │
   ILI9341 RST ──────────┤ GPIO5         │
-  ILI9341 LED ──────────┤ GPIO4         │
+  ILI9341 LED ──────────┤ GPIO25        │
                         │               │
   SD Card CS ───────────┤ GPIO12        │
                         │               │

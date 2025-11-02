@@ -47,19 +47,19 @@
 │    │  Physical Buttons (5x)                     │                           │
 │    │                                             │                           │
 │    │     ┌────┐                                  │                           │
-│    │  ───┤ UP ├─── GPIO27 ──GND                │                           │
+│    │  ───┤ UP ├─── GPIO14 ──GND                │                           │
 │    │     └────┘                                  │                           │
 │    │     ┌────┐                                  │                           │
 │    │  ───┤DOWN├─── GPIO33 ──GND                │                           │
 │    │     └────┘                                  │                           │
 │    │     ┌────┐                                  │                           │
-│    │  ───┤LEFT├─── GPIO25 ──GND                │                           │
+│    │  ───┤LEFT├─── GPIO13 ──GND                │                           │
 │    │     └────┘                                  │                           │
 │    │     ┌────┐                                  │                           │
-│    │  ───┤RGHT├─── GPIO32 ──GND                │                           │
+│    │  ───┤RGHT├─── GPIO21 ──GND                │                           │
 │    │     └────┘                                  │                           │
 │    │     ┌────┐                                  │                           │
-│    │  ───┤CNTR├─── GPIO26 ──GND                │                           │
+│    │  ───┤CNTR├─── GPIO22 ──GND                │                           │
 │    │     └────┘                                  │                           │
 │    │                                             │                           │
 │    │     USB ─────────────────────○             │                           │
@@ -86,19 +86,19 @@
 ║             │  SDO (MISO)     │  GPIO19      │  SPI Data Out (optional)      ║
 ║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
 ║             │                 │              │                               ║
-║  Button UP  │  Terminal 1     │  GPIO27      │  General purpose GPIO         ║
+║  Button UP  │  Terminal 1     │  GPIO14      │  Safe GPIO, WiFi-compatible   ║
 ║             │  Terminal 2     │  GND         │  Uses internal pullup         ║
 ║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
-║ Button DOWN │  Terminal 1     │  GPIO33      │  General purpose GPIO         ║
+║ Button DOWN │  Terminal 1     │  GPIO33      │  Safe GPIO, WiFi-compatible   ║
 ║             │  Terminal 2     │  GND         │  Uses internal pullup         ║
 ║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
-║ Button LEFT │  Terminal 1     │  GPIO25      │  General purpose GPIO         ║
+║ Button LEFT │  Terminal 1     │  GPIO13      │  Safe GPIO, WiFi-compatible   ║
 ║             │  Terminal 2     │  GND         │  Uses internal pullup         ║
 ║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
-║Button RIGHT │  Terminal 1     │  GPIO32      │  General purpose GPIO         ║
+║Button RIGHT │  Terminal 1     │  GPIO21      │  Safe GPIO, WiFi-compatible   ║
 ║             │  Terminal 2     │  GND         │  Uses internal pullup         ║
 ║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
-║Button CENTER│  Terminal 1     │  GPIO26      │  General purpose GPIO         ║
+║Button CENTER│  Terminal 1     │  GPIO22      │  Safe GPIO, WiFi-compatible   ║
 ║             │  Terminal 2     │  GND         │  Uses internal pullup         ║
 ║─────────────┼─────────────────┼──────────────┼───────────────────────────────║
 ║             │                 │              │                               ║

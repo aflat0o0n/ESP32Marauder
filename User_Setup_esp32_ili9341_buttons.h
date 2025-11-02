@@ -36,7 +36,7 @@
 #define TFT_RST   5  // Reset pin (could connect to RST pin)
 //#define TFT_RST  -1  // Set TFT_RST to -1 if display RESET is connected to ESP32 board RST
 
-#define TFT_BL   4  // LED back-light control pin (moved from GPIO32 to avoid button interference)
+#define TFT_BL   25  // LED back-light control pin (GPIO25 safe for output, ADC2 doesn't affect outputs)
 
 // Touch screen is NOT used - using physical buttons instead
 #define TOUCH_CS -1     // Disabled

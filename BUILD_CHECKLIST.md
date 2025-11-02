@@ -28,11 +28,11 @@ Use this checklist to track your build progress and ensure nothing is missed.
 - [ ] MISO → GPIO19 (optional but recommended)
 
 ### Button Wiring
-- [ ] Up button → GPIO27 to GND
+- [ ] Up button → GPIO14 to GND
 - [ ] Down button → GPIO33 to GND
-- [ ] Left button → GPIO25 to GND
-- [ ] Right button → GPIO32 to GND
-- [ ] Center button → GPIO26 to GND
+- [ ] Left button → GPIO13 to GND
+- [ ] Right button → GPIO21 to GND
+- [ ] Center button → GPIO22 to GND
 - [ ] Verify all buttons are normally open (not closed)
 
 ### SD Card Wiring (Optional)

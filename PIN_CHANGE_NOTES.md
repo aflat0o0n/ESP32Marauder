@@ -1,40 +1,51 @@
-# Button Pin Assignment Changes - Fixing Display Interference Issue
+# Button Pin Assignment Changes - Critical WiFi Compatibility Fix
 
-## Problem
-The original button pin assignments were causing false triggers due to electrical interference from the ILI9341 display's SPI bus and backlight PWM.
+## Issue History
 
-## Root Cause
-The previous button pins (GPIO34, 35, 36, 39) were:
-1. **ADC pins** - highly sensitive to electrical noise
-2. **INPUT_ONLY pins** (GPIO36, 39) - limited configuration options
-3. **Located near SPI signals** - susceptible to crosstalk from MOSI (GPIO23), SCK (GPIO18)
-4. **Affected by backlight PWM** - GPIO32 backlight induced noise in nearby ADC pins
+### Issue 1: Display Interference (Fixed)
+The original button pins (GPIO34, 35, 36, 39) were ADC-sensitive and triggered falsely due to display SPI interference.
 
-## Solution
-Reassigned buttons to more robust GPIO pins that are:
-- **General-purpose GPIO** (not ADC, not INPUT_ONLY)
-- **Physically separated** from SPI bus activity
-- **Less susceptible** to electromagnetic interference
-- **Proper pull-up support** with better noise immunity
+### Issue 2: WiFi Incompatibility (CRITICAL - Current Fix)
+The second attempt used GPIO25-27, 32-33, but **GPIO25-27 are ADC2 pins that are completely disabled when WiFi is active**. Since ESP32 Marauder uses WiFi extensively, these pins don't work as inputs.
 
-## New Pin Assignments
+## Root Cause - ADC2 and WiFi Conflict
+**CRITICAL ISSUE:** ESP32's ADC2 module shares hardware with the WiFi module. When WiFi is enabled, **all ADC2 pins become unusable** - not just for analog reading, but also for digital input!
 
-### Buttons (Changed)
-| Button  | Old Pin | New Pin | Reason |
-|---------|---------|---------|--------|
-| Up      | GPIO36  | GPIO27  | Avoid ADC/INPUT_ONLY, far from SPI |
-| Down    | GPIO35  | GPIO33  | Avoid ADC sensitivity |
-| Left    | GPIO13  | GPIO25  | Better isolation from SPI |
-| Right   | GPIO39  | GPIO32  | Avoid INPUT_ONLY, was backlight |
-| Center  | GPIO34  | GPIO26  | Avoid ADC sensitivity |
+**ADC2 Pins (Cannot use with WiFi):**
+- GPIO0, GPIO2, GPIO4, GPIO12-15, **GPIO25-27**
 
-### Display Backlight (Changed)
-| Function  | Old Pin | New Pin | Reason |
-|-----------|---------|---------|--------|
-| Backlight | GPIO32  | GPIO4   | Free up GPIO32 for button use |
+This is why only GPIO33 (DOWN) and GPIO26 (CENTER) worked initially - they were tested before WiFi started, but failed once WiFi was active.
+
+## Solution - WiFi-Compatible Pins
+Selected pins that:
+- **NOT ADC2** - work regardless of WiFi state
+- **NOT ADC1** (34-39) - avoid noise sensitivity
+- **NOT boot-critical** - reliable startup
+- **Support INPUT_PULLUP** - proper button operation
+- **Available** - not used by display or SD card
+
+## Current Pin Assignments (WiFi-Safe)
+
+### Button Pin Evolution
+| Button  | V1 (Noise) | V2 (WiFi Fail) | V3 (Final) | Status |
+|---------|-----------|----------------|------------|--------|
+| Up      | GPIO36    | GPIO27 ❌      | **GPIO14** | ✅ Works |
+| Down    | GPIO35    | GPIO33 ✅      | **GPIO33** | ✅ Works |
+| Left    | GPIO13    | GPIO25 ❌      | **GPIO13** | ✅ Works |
+| Right   | GPIO39    | GPIO32 ❌      | **GPIO21** | ✅ Works |
+| Center  | GPIO34    | GPIO26 ❌      | **GPIO22** | ✅ Works |
+
+❌ = ADC2 pin, disabled with WiFi  
+✅ = Safe GPIO, WiFi-compatible
+
+### Display Backlight
+| Function  | V1  | V2  | V3 (Final) | Status |
+|-----------|-----|-----|------------|--------|
+| Backlight | GPIO32 | GPIO4 | **GPIO25** | ✅ Works (output only) |
+
+*Note: GPIO25 is ADC2 but safe for OUTPUT (only INPUT is affected by WiFi)*
 
 ### Display SPI (Unchanged)
-All display SPI pins remain the same:
 - MOSI: GPIO23
 - MISO: GPIO19
 - SCK: GPIO18
@@ -42,14 +53,20 @@ All display SPI pins remain the same:
 - DC: GPIO16
 - RST: GPIO5
 
-## Technical Benefits
+## Why Final Pins Work With WiFi
 
-### Why These Pins Are Better
-1. **GPIO25, 26, 27** - RTC/DAC pins but work perfectly as digital GPIO, far from SPI bus
-2. **GPIO32, 33** - RTC pins, robust digital GPIO with good noise immunity
-3. **All are bidirectional** - support INPUT_PULLUP properly
-4. **Not ADC1 pins** - avoid analog-to-digital converter noise sensitivity
-5. **Physically distant** from SPI MOSI (GPIO23) and SCK (GPIO18)
+### Safe Button Pins
+1. **GPIO13** (LEFT) - Not ADC, not boot-critical (on pullup)
+2. **GPIO14** (UP) - Not ADC, general purpose
+3. **GPIO21** (RIGHT) - Not ADC, I2C SDA but works as GPIO
+4. **GPIO22** (CENTER) - Not ADC, I2C SCL but works as GPIO  
+5. **GPIO33** (DOWN) - Not ADC2, RTC domain, WiFi-safe
+
+### Why Previous Pins Failed
+- **GPIO25, 26, 27** - ADC2 channel pins
+- **ADC2 hardware conflict** - Shares silicon with WiFi radio
+- **Complete input disable** - Not just analog, but digital input too
+- **Only affects INPUT mode** - OUTPUT still works (backlight OK on GPIO25)
 
 ### Why Original Pins Had Issues
 1. **GPIO34, 35, 36, 39** are all ADC1 channel pins

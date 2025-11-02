@@ -29,11 +29,11 @@ Five GPIO pins configured for physical buttons:
 
 | Button | GPIO | Type | Function |
 |--------|------|------|----------|
-| Up | 27 | INPUT_ONLY | Navigate menu up |
+| Up | 14 | INPUT_ONLY | Navigate menu up |
 | Down | 33 | ADC | Navigate menu down |
-| Left | 25 | General | Go back / Navigate left |
-| Right | 32 | INPUT_ONLY | Navigate right / Enter submenu |
-| Center | 26 | ADC | Select / Confirm action |
+| Left | 13 | General | Go back / Navigate left |
+| Right | 21 | INPUT_ONLY | Navigate right / Enter submenu |
+| Center | 22 | ADC | Select / Confirm action |
 
 **Pull-up Configuration:**
 - All buttons use internal pull-up resistors
